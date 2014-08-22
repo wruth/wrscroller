@@ -1,0 +1,4 @@
+wrscroller
+==========
+
+Simple jQuery scroller
