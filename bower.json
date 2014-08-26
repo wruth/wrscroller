@@ -1,0 +1,31 @@
+{
+  "name": "wrscroller",
+  "version": "0.1.0",
+  "homepage": "https://github.com/wruth/wrscroller",
+  "authors": [
+    "Ward Ruth <ward.ruth@gmail.com>"
+  ],
+  "description": "A very simple jQuery scroller, with minimal requirements for structure and styling of content.",
+  "main": "dist/jquery.wrscroller.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "jquery",
+    "plugin",
+    "scroller"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "src",
+    "libs"
+  ],
+  "dependencies": {
+    "jquery":"~1.7.2",
+    "jquery.transform.js":"~1.0.0"
+  }
+}

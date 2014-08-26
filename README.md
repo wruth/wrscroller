@@ -2,6 +2,8 @@
 
 A very simple jQuery scroller. WRScroller has minimal requirements for structure and styling your content, preferring to be unobtrusive and just scroll the content! WRScroller doesn't have any detailed knowledge of what that content is: scrolling is performed in increments of it's viewport width. If the computed width of the scroll container content is not evenly divisible by the width of the viewport, the final scroll will be only just enough to fully show the last content. Scroll stops are computed from the start and the end on this basis, making scrolling groups of multiple items at a time easy.
 
+And yes, I realize the world does not need another jQuery scroller implementation. I created this as an exercise for myself primarily, but hopefully with enough polish that if someone else finds it useful you are welcome to it :sunglasses:.
+
 ## Getting Started
 Download the [production version][min] or the [development version][max].
 
@@ -129,18 +131,28 @@ The `completeCallback` if provided will be called when scrolling animations are 
 * WRScroller will manage adding and removing a `.disabled` class to the previous and next controls (if they exist) when it determines the `$scrollContainer` will reach or leave it's leftmost or rightmost position.
 * WRScroller will add and remove a `.mouse-enter` class on it's root element when the user's mouse enters or leaves the component. This can be useful if you want to modify the visual state of the nav elements or the scroller in response to this.
 * The WRScroller is in fact implemented by creating instances of a `WRScroller` "class" for each matching wrapped element. This instance is stored in a `data-wrscroller` attribute on the scroller element, allowing you to retrieve a direct reference to the instance.
-* `WRScroller` exposes two public methods you can call independently: `previous()` and `next()`. These each return a reference to the scroller itself.
-* `WRScroller` maintains two public Boolean properties: `isAtStart` and `isAtEnd`. These properties are updated at _the beginning_ of a scroll that will complete with the scroller at either it's start or end position.
+* `WRScroller` method and property reference detailed in the next sections below:
+
+### API
+#### Methods
+| Name | Arguments | Returns | Description |
+| ---- | --------- | ------- | ----------- |
+| previous() | none | WRScroller | Scroll to previous position if possible. |
+| next() | none | WRScroller | Scroll to next position if possible. |
+| destroy() | none | nothing | Stop any transitions in progress, remove any listeners added by the plug-in itself, remove any css classes added by the plug-in, and return the main div and it's children to the state they were in before the plug-in was invoked on them. |
+
+### Properties
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| isAtStart | Boolean | Updated at _the beginning_ of a scroll transition. Will be `true` if the scroll will end at the initial or start position, `false` otherwise. |
+| isAtEnd | Boolean | Updated at _the beginning_ of a scroll transition. Will be `true` if the scroll will end at the final or end position, `false` otherwise. | 
 
 ## Dependencies
-* jQuery 1.4.3+
+* jQuery 1.7.2
 * [jquery.transform.js][transform] (augments jQuery to use CSS3 transforms)
 
 ## Installation
-Manually of course by downloading the un-minified or minified source (and the noted dependencies above), _or_ as a bower package: `foo`
-
-## Release History
-_(Nothing yet)_
+Manually of course by downloading the un-minified or minified source (and the noted dependencies above), _or_ as a bower package: `bower install wrslider`
 
 ## License
 Copyright (c) 2014 Ward Ruth

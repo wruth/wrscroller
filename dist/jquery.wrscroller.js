@@ -1,5 +1,5 @@
-/*! WRScroller - v0.1.0 - 2014-08-25
-* https://github.com/wardmruth/wrscroller
+/*! WRScroller - v0.1.0 - 2014-08-26
+* https://github.com/wruth/wrscroller
 * Copyright (c) 2014 Ward Ruth; Licensed MIT */
 ;(function ($) {
 
@@ -279,6 +279,14 @@
        return this;
     };
 
+    /**
+     * Stop any scrolls in progress, remove any classes that have been added by
+     * the plugin, remove all listeners added by this plug-in, and otherwise
+     * return the main div and it's children to the state they were in before
+     * this plugin was invoked on them.
+     *
+     * @method  destroy
+     */
     $.WRScroller.prototype.destroy = function () {
         var ns = '.wrscroller',
             $el = this.$el;
