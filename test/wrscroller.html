@@ -7,8 +7,49 @@
   <script src="../libs/jquery-loader.js"></script>
   <!-- Load local QUnit. -->
   <link rel="stylesheet" href="../libs/qunit/qunit.css" media="screen">
+  <style type="text/css">
+    .scroller {
+      position: relative;
+      width: 960px;
+    }
+
+    .scroller .viewport {
+      position: relative;
+      width: 100%;
+      height: 300px;
+    }
+
+    .scroller .viewport .scrollContainer {
+      list-style: none;
+      padding: 0;
+      position: absolute;
+    }
+
+    .scroller .viewport .scrollContainer li {
+      display: block;
+      float: left;
+      margin: 0 10px;
+      width: 220px;
+      height: 300px;
+    }
+
+    .scroller .nav {
+      position: absolute;
+      display: block;
+    }
+
+    .scroller .previous {
+      left: 0;
+    }
+
+    .scroller .next {
+      right: 0;
+    }
+  </style>
+
   <script src="../libs/qunit/qunit.js"></script>
   <!-- Load local lib and tests. -->
+  <script src="../libs/jquery.transform2d.js"></script>
   <script src="../src/jquery.wrscroller.js"></script>
   <script src="wrscroller_test.js"></script>
   <!-- Removing access to jQuery and $. But it'll still be available as _$, if
@@ -19,9 +60,19 @@
 <body>
   <div id="qunit"></div>
   <div id="qunit-fixture">
-    <span>lame test markup</span>
-    <span>normal test markup</span>
-    <span>awesome test markup</span>
+    <div class="scroller">
+      <div class="viewport">
+        <ul class="scrollContainer">
+          <li>One</li>
+          <li>Two</li>
+          <li>Three</li>
+          <li>Four</li>
+          <li>Five</li>
+        </ul>
+      </div>
+      <a href="#" clas="nav previous">previous</a>
+      <a href="#" class="nav next">next</a>
+    </div>
   </div>
 </body>
 </html>

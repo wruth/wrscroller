@@ -22,41 +22,33 @@
 
   module('jQuery#wrscroller', {
     // This will run before each test in this module.
-    setup: function() {
-      this.elems = $('#qunit-fixture').children();
+    setup: function () {
+      this.$wrscroller = $('#qunit-fixture .scroller').wrscroller();
+      this.wrscroller = this.$wrscroller.data('wrscroller');
+    },
+    teardown: function () {
+      this.wrscroller.destroy();
+      this.$wrscroller = null;
     }
   });
 
-  test('is chainable', function() {
+  test('is chainable', function () {
     expect(1);
+    var elems = $('#qunit-fixture').children();
     // Not a bad test to run on collection methods.
-    strictEqual(this.elems.wrscroller(), this.elems, 'should be chainable');
+    strictEqual(elems.wrscroller(), elems, 'should be chainable');
   });
 
-  test('is awesome', function() {
-    expect(1);
-    strictEqual(this.elems.wrscroller().text(), 'awesome0awesome1awesome2', 'should be awesome');
-  });
-
-  module('jQuery.wrscroller');
-
-  test('is awesome', function() {
-    expect(2);
-    strictEqual($.wrscroller(), 'awesome.', 'should be awesome');
-    strictEqual($.wrscroller({punctuation: '!'}), 'awesome!', 'should be thoroughly awesome');
-  });
-
-  module(':wrscroller selector', {
-    // This will run before each test in this module.
-    setup: function() {
-      this.elems = $('#qunit-fixture').children();
-    }
-  });
-
-  test('is awesome', function() {
-    expect(1);
-    // Use deepEqual & .get() when comparing jQuery objects.
-    deepEqual(this.elems.filter(':wrscroller').get(), this.elems.last().get(), 'knows awesome when it sees it');
+  test('endpoints', function() {
+    expect(6);
+    strictEqual(this.wrscroller.isAtStart, true, 'should initially be at start');
+    strictEqual(this.wrscroller.isAtEnd, false, 'should not initially be at end');
+    this.wrscroller.next();
+    strictEqual(this.wrscroller.isAtStart, false, 'after next should not be at start');
+    strictEqual(this.wrscroller.isAtEnd, true, 'after next should be at end');
+    this.wrscroller.previous();
+    strictEqual(this.wrscroller.isAtStart, true, 'after previous should be at start');
+    strictEqual(this.wrscroller.isAtEnd, false, 'after previous should not be at end');
   });
 
 }(jQuery));
