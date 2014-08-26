@@ -1,6 +1,6 @@
 {
   "name": "wrscroller",
-  "version": "0.1.0-alpha",
+  "version": "0.2.0-alpha",
   "homepage": "https://github.com/wruth/wrscroller",
   "authors": [
     "Ward Ruth <ward.ruth@gmail.com>"
@@ -26,6 +26,6 @@
   ],
   "dependencies": {
     "jquery":"~1.7.2",
-    "jquery.transform.js":"~1.0.0"
+    "jquery-transform": "*"
   }
 }
