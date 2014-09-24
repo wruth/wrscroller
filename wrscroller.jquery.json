@@ -2,7 +2,7 @@
   "name": "wrscroller",
   "title": "WRScroller",
   "description": "A very simple jQuery scroller.",
-  "version": "0.1.0",
+  "version": "0.3.0-alpha",
   "homepage": "https://github.com/wruth/wrscroller",
   "author": {
     "name": "Ward Ruth",
@@ -20,7 +20,10 @@
     }
   ],
   "dependencies": {
-    "jquery": ">=1.4.3"
+    "jquery": ">=1.8.0"
   },
-  "keywords": []
+  "keywords": [
+    "scroller",
+    "touch"
+  ]
 }
