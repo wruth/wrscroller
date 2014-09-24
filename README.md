@@ -111,44 +111,48 @@ A simplified view of this (omitting the nav elements) might look something like 
                
 
 ```
-When it is initialized, the WRScroller sums the widths of the $scrollContainer's children, including their horizontal margins. This value is then assigned as the explicit style width of the $scrollContainer. Then, as you would expect, scrolling is achieved by animating the horizontal position of the $scrollContainer. 
+When it is initialized, the WRScroller sums the widths of the `$scrollContainer`'s children, including their horizontal margins. This value is then assigned as the explicit style width of the `$scrollContainer`. Then, as you would expect, scrolling is achieved by animating the horizontal position of the `$scrollContainer`. 
 
-The scroll animation is achieved using a CSS3 2D transform if possible, or failing that fallsback to animating the $scrollContainer's `left` value.
+The scroll animation is achieved using a CSS3 2D transform if possible, or failing that fallsback to animating the `$scrollContainer`'s `left` value.
 
 ### Configuration
 An options argument Object can be provided when invoking wrscroller. Configuration properties and their default values are:
 
-* `scrollDuration`: `250` (milliseconds)
-* `scrollEasing`: `'swing'`
-* `viewportSelector`: `'.viewport'`
-* `previousSelector`: `'.previous'`
-* `nextSelector`: `'.next'`
-* `completeCallback`: no op.
+| Property Name | Default Value | Description |
+| ------------- | ------------- | ----------- |
+| `scrollDuration`| `250` | Duration (milliseconds) of a normal scroll transition. |
+| `flickScrollDuration`| `125` | Duration (milliseconds) of a scroll transition when initiated through a 'flick' gesture. |
+| `scrollEasing`| `'swing'` | Standard jQuery easing. |
+| `viewportSelector`| `'.viewport'` | The viewport element defines the container through which the scrollable content can be seen. |
+| `previousSelector`| `'.previous'` | Selector for a control or element to control scrolling to a previous item. |
+| `nextSelector`| `'.next'`| Selector for a control or element to control scrolling to a next item. |
+| `shortTouchXLimit`| `10` | Hysteresis pixel value to filter out unintended flick gestures. |
+| `completeCallback`| no op. | Invoked when a scroll transition has completed. The WRScroller instance is passed back as an argument. |
 
-The `completeCallback` if provided will be called when scrolling animations are complete. A reference to the `WRScroller` instance itself is provided as the sole argument to the callback.
 
 ### Further Notes on Behavior and Functionality
 * WRScroller will manage adding and removing a `.disabled` class to the previous and next controls (if they exist) when it determines the `$scrollContainer` will reach or leave it's leftmost or rightmost position.
-* WRScroller will add and remove a `.mouse-enter` class on it's root element when the user's mouse enters or leaves the component. This can be useful if you want to modify the visual state of the nav elements or the scroller in response to this.
-* The WRScroller is in fact implemented by creating instances of a `WRScroller` "class" for each matching wrapped element. This instance is stored in a `data-wrscroller` attribute on the scroller element, allowing you to retrieve a direct reference to the instance.
+* WRScroller will add and remove a `.mouse-enter` class on it's root element when the user's mouse enters or leaves the component. It also adds a jQuery data property with a key of `'mouse-enter'` and a value of `'yes'`. This can be useful if you want to modify the visual state of the nav elements or the scroller in response to this.
+* The WRScroller is in fact implemented by creating instances of a `WRScroller` "class" for each matching wrapped element. This instance is stored in a jQuery data property for each matched element with a key of `'wrscroller'`, allowing you to retrieve a direct reference to the instance.
+* The WRScroller also listens for touch events, allowing itself to be scrolled through horizontal swipe or flick gestures. A swipe of greater than half the width of the viewport will navigate the scroller. A flick gesture can also be used, which is a swipe of a short duration. This will result in a more rapid transition. Scale transforms applied to the viewport element will be accounted for in tracking swipe and flick gestures.
 * `WRScroller` method and property reference detailed in the next sections below:
 
 ### API
 #### Methods
 | Name | Arguments | Returns | Description |
 | ---- | --------- | ------- | ----------- |
-| previous() | none | WRScroller | Scroll to previous position if possible. |
-| next() | none | WRScroller | Scroll to next position if possible. |
-| destroy() | none | nothing | Stop any transitions in progress, remove any listeners added by the plug-in itself, remove any css classes added by the plug-in, and return the main div and it's children to the state they were in before the plug-in was invoked on them. |
+| `previous()` | none | WRScroller | Scroll to previous position if possible. |
+| `next()` | none | WRScroller | Scroll to next position if possible. |
+| `destroy()` | none | nothing | Stop any transitions in progress, remove any listeners added by the plug-in itself, remove any css classes added by the plug-in, and return the main div and it's children to the state they were in before the plug-in was invoked on them. |
 
 ### Properties
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| isAtStart | Boolean | Updated at _the beginning_ of a scroll transition. Will be `true` if the scroll will end at the initial or start position, `false` otherwise. |
-| isAtEnd | Boolean | Updated at _the beginning_ of a scroll transition. Will be `true` if the scroll will end at the final or end position, `false` otherwise. | 
+| `isAtStart` | Boolean | Updated at _the beginning_ of a scroll transition. Will be `true` if the scroll will end at the initial or start position, `false` otherwise. |
+| `isAtEnd` | Boolean | Updated at _the beginning_ of a scroll transition. Will be `true` if the scroll will end at the final or end position, `false` otherwise. | 
 
 ## Dependencies
-* jQuery 1.7.2
+* jQuery 1.8.0
 * [jquery.transform.js][transform] (augments jQuery to use CSS3 transforms)
 
 ## Installation
